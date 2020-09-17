@@ -8,10 +8,14 @@ namespace Takenokohal.Scripts
 
         private static string GetName() => typeof(T).Name;
 
+        //初期化時に呼ぶ関数。overrideして使う。
+        //なるべくStart関数などは使わずにこっちを使って欲しい。
         protected virtual void InitializeMethod()
         {
         }
 
+        //何もない状態で生成する。
+        //インスペクタで値編集をしないものに
         public abstract class AddComponentSingleton : SingletonObjectBase<T>
         {
             public static T Instance
@@ -32,6 +36,8 @@ namespace Takenokohal.Scripts
             }
         }
 
+        //アタッチしたものをResourceフォルダに入れて使う。
+        //インスペクタで編集したいものに
         public abstract class InResourcesSingleton : SingletonObjectBase<T>
         {
             public static T Instance
@@ -54,6 +60,7 @@ namespace Takenokohal.Scripts
             }
         }
 
+        //元々Scene上にあるものをシングルトンとして扱う。
         public abstract class InSceneSingleton : SingletonObjectBase<T>
         {
             public static T Instance
